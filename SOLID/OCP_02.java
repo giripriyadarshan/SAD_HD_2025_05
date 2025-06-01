@@ -1,37 +1,54 @@
 package SOLID;
 
+
+
 public class OCP_02 {
 
-    /*
-     * TASK:
-     * (classical task)
-     * How to add other shapes without violating the OCP
-     * (Open/Closed Principle)?
-     * The interface/class/method bodies are empty by purpose
-     * and there is no main provided.
-     */
-    
-    public static abstract class Shape {
+    public abstract static class Shape {
+        public abstract double calculateArea();
     }
 
     public static class Square extends Shape {
+        private double side;
+
+        public Square(double side) {
+            this.side = side;
+        }
+
+        @Override
+        public double calculateArea() {
+            System.out.println("Calculating area of a square.");
+            return side * side;
+        }
     }
 
     public static class Circle extends Shape {
-    }
+        private double radius;
 
+        public Circle(double radius) {
+            this.radius = radius;
+        }
+
+        @Override
+        public double calculateArea() {
+            System.out.println("Calculating area of a circle.");
+            return Math.PI * radius * radius;
+        }
+    }
     public static class AreaCalculator {
         public double getArea(Shape shape) {
-            double areaOfShape = 0.0;
-            if (shape instanceof Square) {
-                // calculate the area of a Square
-                areaOfShape = 0.0;
-            }
-            else if (shape instanceof Circle) {
-                // calculate the area of a Circle
-                areaOfShape = 0.0;
-            }
-            return areaOfShape;
+            return shape.calculateArea();
         }
+    }
+
+    public static void main(String[] args) {
+        AreaCalculator calculator = new AreaCalculator();
+
+        Shape square = new Square(5.0);
+        System.out.println("Area of square: " + calculator.getArea(square));
+
+        Shape circle = new Circle(3.0);
+        System.out.println("Area of circle: " + calculator.getArea(circle));
+
     }
 }
